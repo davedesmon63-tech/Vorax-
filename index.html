@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAC BOSS SAAS - by Shanks Vorax</title>
+<style>
+  :root {
+    --orange: #F97316;
+    --bleu-nuit: #0B1120;
+    --bleu-card: #111827;
+    --vert: #22C55E;
+  }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background: var(--bleu-nuit); color: white; min-height: 100vh; padding-bottom: 90px; }
+  .header { background: linear-gradient(135deg, var(--orange) 0%, #EA580C 100%); padding: 25px 15px; text-align: center; position: relative; }
+  .header h1 { font-size: 26px; font-weight: 900; }
+  .lang-btn { position: absolute; right: 15px; top: 25px; background: white; color: var(--orange); border: none; padding: 8px 12px; border-radius: 20px; font-weight: 800; cursor: pointer; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .tabs { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 20px; }
+  .tab { padding: 12px 18px; background: var(--bleu-card); border-radius: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; border: 2px solid #1F2937; }
+  .tab.active { background: var(--orange); border-color: var(--orange); }
+  .card { background: var(--bleu-card); border-radius: 20px; padding: 25px; margin-bottom: 20px; border: 1px solid #1F2937; animation: slideUp 0.5s ease; }
+  @keyframes slideUp { from {opacity:0; transform: translateY(20px)} to {opacity:1; transform: translateY(0)} }
+  .input-box { width: 100%; padding: 16px; background: var(--bleu-nuit); border: 2px solid #1F2937; border-radius: 12px; color: white; font-size: 16px; margin: 15px 0; }
+  .btn-primary { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--orange) 0%, #EA580C 100%); color: white; border: none; border-radius: 12px; font-weight: 900; font-size: 16px; cursor: pointer; }
+  .btn-primary:hover { transform: scale(1.02); }
+  .result-box { background: var(--bleu-nuit); border-left: 4px solid var(--orange); padding: 25px; border-radius: 12px; margin-top: 20px; line-height: 1.9; white-space: pre-wrap; }
+  .explication { background: var(--bleu-card); padding: 12px; border-radius: 8px; margin: 8px 0; border-left: 3px solid var(--vert); }
+  .translate-btn { background: var(--vert); color: white; border: none; padding: 10px 15px; border-radius: 8px; margin-top: 10px; cursor: pointer; font-weight: 700; }
+  .verbe-box { display: flex; gap: 10px; align-items: center; }
+  .audio-btn { background: var(--vert); border: none; padding: 12px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+  .footer { position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: var(--orange); text-align: center; padding: 15px; font-weight: 800; border-top: 2px solid var(--orange); }
+  .footer .nom { color: white; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1 id="titre">🇨🇮 BAC BOSS SAAS</h1>
+  <p id="sous-titre">L'IA qui te fait avoir 18/20 en Anglais</p>
+  <button class="lang-btn" onclick="toggleLang()">EN / FR</button>
+</div>
+
+<div class="container">
+  <div class="tabs">
+    <div class="tab active" onclick="openTab(0)" id="tab1">1. Générateur</div>
+    <div class="tab" onclick="openTab(1)" id="tab2">2. Comment Faire</div>
+    <div class="tab" onclick="openTab(2)" id="tab3">3. Verbes & Prononciation</div>
+  </div>
+
+  <!-- MODULE 1 : GENERATEUR -->
+  <div class="card">
+    <h2 id="h2-gen">📝 GÉNÉRATEUR DE DISSERTATION</h2>
+    <input id="sujet" class="input-box" placeholder="Ex: Is social media good for students?">
+    <button class="btn-primary" onclick="genererBoss()" id="btn-gen">✨ GÉNÉRER MA DISSERTATION 18/20</button>
+    <div id="result" style="display:none;">
+      <div class="result-box" id="dissertation"></div>
+      <button class="translate-btn" onclick="traduireResultat()">🔄 Traduire en Français</button>
+    </div>
+  </div>
+
+  <!-- MODULE 2 : COMMENT FAIRE -->
+  <div class="card" style="display:none;">
+    <h2 id="h2-methode">📚 COMMENT FAIRE UNE DISSERTATION ?</h2>
+    <div class="explication">
+      <b>ÉTAPE 1: INTRODUCTION</b><br>
+      EN: Hook + Topic + Thesis<br>
+      FR: Accroche + Sujet + Annonce de plan<br>
+      Ex: "In today's world, technology is everywhere. This essay will discuss..."
+    </div>
+    <div class="explication">
+      <b>ÉTAPE 2: DÉVELOPPEMENT</b><br>
+      EN: 3 Paragraphs = Advantages / Disadvantages / Solutions<br>
+      FR: 3 Parties = Avantages / Inconvénients / Solutions<br>
+      Utilise: Firstly, Furthermore, However, In conclusion
+    </div>
+    <div class="explication">
+      <b>ÉTAPE 3: CONCLUSION</b><br>
+      EN: Summary + Opinion<br>
+      FR: Bilan + Avis personnel<br>
+      Ex: "In conclusion, although there are problems, the benefits are greater."
+    </div>
+  </div>
+
+  <!-- MODULE 3 : VERBES & PRONONCIATION -->
+  <div class="card" style="display:none;">
+    <h2 id="h2-verbe">🔊 VERBES & PRONCIATION</h2>
+    <div class="verbe-box">
+      <input id="verbe" class="input-box" placeholder="Ex: go, eat, study, have" style="margin:0;">
+      <button class="audio-btn" onclick="prononcer()">🔊</button>
+    </div>
+    <select id="temps" class="input-box">
+      <option>Present Simple</option>
+      <option>Past Simple</option>
+      <option>Future Simple</option>
+      <option>Present Perfect</option>
+    </select>
+    <button class="btn-primary" onclick="conjuguer()" id="btn-conj">⚡ CONJUGUER + PRONCER</button>
+    <div id="resultConjug" style="display:none;"><div class="result-box" id="conjug"></div></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Created by <span class="nom">ADJOUMANI KOUABENAN BEBOUMANE RICHMIN</span><br>
+  Pseudo : SHANKS VORAX 🤴
+</div>
+
+<script>
+let lang = 'FR';
+
+function toggleLang() {
+  lang = lang === 'FR'? 'EN' : 'FR';
+  document.getElementById('titre').innerText = lang==='FR'? "🇨🇮 BAC BOSS SAAS" : "🇨🇮 BAC BOSS SAAS";
+  document.getElementById('sous-titre').innerText = lang==='FR'? "L'IA qui te fait avoir 18/20 en Anglais" : "The AI that gets you 18/20 in English";
+  document.getElementById('tab1').innerText = lang==='FR'? "1. Générateur" : "1. Generator";
+  document.getElementById('tab2').innerText = lang==='FR'? "2. Comment Faire" : "2. How To";
+  document.getElementById('tab3').innerText = lang==='FR'? "3. Verbes & Prononciation" : "3. Verbs & Pronunciation";
+}
+
+function openTab(n) {
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active', i==n));
+  document.querySelectorAll('.container .card').forEach((c,i)=>c.style.display = i==n? 'block' : 'none');
+}
+
+function genererBoss() {
+  const sujet = document.getElementById('sujet').value;
+  if(!sujet) { alert(lang==='FR'? "Écris un sujet d'abord boss 😎" : "Write a topic first boss 😎"); return; }
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('dissertation').innerText = `TITLE: ${sujet}\n\nINTRODUCTION\nIn today's world, the issue of "${sujet}" is widely discussed in Côte d'Ivoire. This essay will analyze the advantages and disadvantages.\n\nBODY 1: ADVANTAGES\nFirstly, ${sujet} has many positive effects. For example, in Abidjan students use it to learn.\n\nBODY 2: DISADVANTAGES\nHowever, ${sujet} also has problems. Many students waste time on TikTok.\n\nCONCLUSION\nIn conclusion, we must use it wisely.`;
+}
+
+function traduireResultat() {
+  const texte = document.getElementById('dissertation').innerText;
+  const traduit = texte
+   .replace("TITLE:", "TITRE:")
+   .replace("INTRODUCTION", "INTRODUCTION")
+   .replace("ADVANTAGES", "AVANTAGES")
+   .replace("DISADVANTAGES", "INCONVÉNIENTS")
+   .replace("CONCLUSION", "CONCLUSION")
+   .replace("In today's world", "Dans le monde d'aujourd'hui")
+   .replace("Firstly", "Premièrement")
+   .replace("However", "Cependant")
+   .replace("In conclusion", "En conclusion");
+  document.getElementById('dissertation').innerText = traduit;
+}
+
+function conjuguer() {
+  const verbe = document.getElementById('verbe').value;
+  const temps = document.getElementById('temps').value;
+  if(!verbe) { alert(lang==='FR'? "Écris un verbe" : "Write a verb"); return; }
+  document.getElementById('resultConjug').style.display = 'block';
+  document.getElementById('conjug').innerHTML = `
+<h3>⚡ ${verbe.toUpperCase()} - ${temps}</h3>
+I ${verbe} <br> He/She ${verbe+'s'} <br> We ${verbe}
+<div class="explication">💡 ${lang==='FR'? 'RÈGLE: Au Present Simple on ajoute "s" à la 3ème personne' : 'RULE: Add "s" for he/she/it in Present Simple'}</div>`;
+}
+
+function prononcer() {
+  const verbe = document.getElementById('verbe').value;
+  if(!verbe) return;
+  const speech = new SpeechSynthesisUtterance(verbe);
+  speech.lang = 'en-US';
+  speech.rate = 0.8;
+  window.speechSynthesis.speak(speech);
+}
+</script>
+</body>
+  </html>
