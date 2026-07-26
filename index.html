@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFRIKA BOSS SAAS - by Shanks Vorax</title>
+<style>
+  :root {
+    --orange-ci: #FF8200; --vert-ci: #009E60; --or: #FFD700;
+    --terre: #8B4513; --noir: #1A1A1A; --creme: #FFF8E7;
+  }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background: var(--creme); color: var(--noir); min-height: 100vh; padding-bottom: 90px; }
+ .header { background: linear-gradient(135deg, var(--orange-ci) 0%, var(--terre) 100%); padding: 25px 15px; text-align: center; border-bottom: 5px solid var(--or); }
+ .header h1 { font-size: 24px; font-weight: 900; color: white; }
+ .header p { color: var(--or); font-weight: 700; }
+ .lang-btn { position: absolute; right: 15px; top: 20px; background: var(--or); color: var(--noir); border: none; padding: 10px 15px; border-radius: 25px; font-weight: 900; }
+ .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+ .tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+ .tab { padding: 16px 10px; background: white; border-radius: 15px; font-weight: 800; cursor: pointer; border: 3px solid var(--vert-ci); color: var(--vert-ci); text-align: center; font-size: 14px; }
+ .tab.active { background: var(--vert-ci); color: white; }
+ .card { background: white; border-radius: 20px; padding: 25px; border: 3px solid var(--or); display: none; }
+ .card.active { display: block; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+ .input-box { width: 100%; padding: 16px; background: var(--creme); border: 3px solid var(--orange-ci); border-radius: 12px; font-size: 16px; margin: 15px 0; font-weight: 600; }
+ .btn-primary { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--orange-ci) 0%, var(--terre) 100%); color: white; border: none; border-radius: 15px; font-weight: 900; font-size: 17px; cursor: pointer; }
+ .result-box { background: var(--creme); border-left: 6px solid var(--vert-ci); padding: 20px; border-radius: 15px; margin-top: 20px; white-space: pre-wrap; border: 2px dashed var(--or); }
+ .explication { background: var(--creme); padding: 15px; border-radius: 12px; margin: 10px 0; border-left: 5px solid var(--orange-ci); }
+ .translate-btn { background: var(--vert-ci); color: white; border: none; padding: 12px 18px; border-radius: 10px; margin-top: 15px; font-weight: 800; }
+ .verbe-box { display: flex; gap: 10px; }
+ .audio-btn { background: var(--or); border: none; padding: 14px; border-radius: 50%; font-size: 20px; border: 3px solid var(--terre); }
+ .footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--noir); color: var(--or); text-align: center; padding: 15px; font-weight: 900; border-top: 4px solid var(--orange-ci); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1 id="titre">🇨🇮 AFRIKA BOSS SAAS</h1>
+  <p id="sous-titre">L'IA Panafricaine pour Réussir le BAC</p>
+  <button class="lang-btn" onclick="toggleLang()">EN / FR</button>
+</div>
+
+<div class="container">
+  <div class="tabs">
+    <div class="tab active" onclick="showModule(0)" id="tab1">1. Générateur</div>
+    <div class="tab" onclick="showModule(1)" id="tab2">2. Méthode</div>
+    <div class="tab" onclick="showModule(2)" id="tab3">3. Verbes & Audio</div>
+  </div>
+
+  <!-- MODULE 1 -->
+  <div class="card active" id="mod0">
+    <h2 id="h2-gen">📝 GÉNÉRATEUR DE DISSERTATION AFRIKAINE</h2>
+    <input id="sujet" class="input-box" placeholder="Ex: social media, technology">
+    <button class="btn-primary" onclick="genererBoss()" id="btn-gen">✨ GÉNÉRER DISSERTATION 18/20</button>
+    <div id="result" style="display:none;">
+      <div class="result-box" id="dissertation"></div>
+      <button class="translate-btn" onclick="traduireResultat()" id="btn-trad">🔄 Traduire TOUT en Français</button>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="card" id="mod1">
+    <h2 id="h2-methode">📚 COMMENT RÉUSSIR UNE DISSERTATION AU BAC?</h2>
+    <div class="explication">
+      <b>ÉTAPE 1: INTRODUCTION</b><br>
+      Accroche + Présenter + Annoncer. <br>
+      Ex: "Dans l'Afrique d'aujourd'hui, le sujet de [X] est important"
+    </div>
+    <div class="explication">
+      <b>ÉTAPE 2: DÉVELOPPEMENT</b><br>
+            1. AVANTAGES avec exemple d'Abidjan<br>
+            2. INCONVÉNIENTS avec TikTok<br>
+            3. SOLUTIONS: L'Etat doit...
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="card" id="mod2">
+    <h2 id="h2-verbe">🔊 VERBES & PRONCIATION AFRICAINE</h2>
+    <div class="verbe-box">
+      <input id="verbe" class="input-box" placeholder="Ex: go, eat, study" style="margin:0;">
+      <button class="audio-btn" onclick="prononcer()">🔊</button>
+    </div>
+    <select id="temps" class="input-box">
+      <option>Present Simple</option>
+      <option>Past Simple</option>
+    </select>
+    <button class="btn-primary" onclick="conjuguer()" id="btn-conj">⚡ CONJUGUER + ÉCOUTER</button>
+    <div id="resultConjug" style="display:none;"><div class="result-box" id="conjug"></div></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Créé par <span style="color:white;">ADJOUMANI KOUABENAN BEBOUMANE RICHMIN</span><br>
+  Pseudo : SHANKS VORAX 🤴 ROI DE L'AFRIQUE
+</div>
+
+<script>
+let lang = 'FR';
+const texts = {
+  FR: {titre: "🇨🇮 AFRIKA BOSS SAAS", sous: "L'IA Panafricaine pour Réussir le BAC", tab1: "1. Générateur", tab2: "2. Méthode", tab3: "3. Verbes & Audio", h2gen: "📝 GÉNÉRATEUR DE DISSERTATION AFRIKAINE", btngen: "✨ GÉNÉRER DISSERTATION 18/20", h2meth: "📚 COMMENT RÉUSSIR UNE DISSERTATION AU BAC?", h2verb: "🔊 VERBES & PRONCIATION AFRICAINE", btnconj: "⚡ CONJUGUER + ÉCOUTER", btntrad: "🔄 Traduire TOUT en Français"},
+  EN: {titre: "🇨🇮 AFRIKA BOSS SAAS", sous: "The Pan-African AI to Pass the BAC", tab1: "1. Generator", tab2: "2. Method", tab3: "3. Verbs & Audio", h2gen: "📝 AFRICAN ESSAY GENERATOR", btngen: "✨ GENERATE 18/20 ESSAY", h2meth: "📚 HOW TO PASS THE BAC ESSAY?", h2verb: "🔊 AFRICAN VERBS & PRONUNCIATION", btnconj: "⚡ CONJUGATE + LISTEN", btntrad: "🔄 Translate ALL to French"}
+};
+
+function toggleLang() {
+  lang = lang === 'FR'? 'EN' : 'FR';
+  const t = texts[lang];
+  for(let key in t){
+    const el = document.getElementById(key);
+    if(el) el.innerText = t[key];
+  }
+}
+
+// FONCTION 100% SÛRE POUR CHANGER D'ONGLET
+function showModule(n) {
+  // Enlever active de tous les onglets
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.remove('active'));
+  // Ajouter active au bon onglet
+  document.querySelectorAll('.tab')[n].classList.add('active');
+
+  // Cacher tous les modules
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+  // Afficher le bon module
+  document.getElementById('mod'+n).classList.add('active');
+}
+
+function genererBoss() {
+  const sujet = document.getElementById('sujet').value;
+  if(!sujet) { alert("Écris un sujet d'abord roi 👑"); return; }
+  document.getElementById('result').style.display = 'block';
+  const sujetPropre = sujet.replace(/Is |Are |Does |Do /i, '').replace('?', '');
+  document.getElementById('dissertation').innerText = `TITLE: ${sujet}\n\nINTRODUCTION\nIn today's Africa, the issue of "${sujetPropre}" is very important.\n\nBODY 1: ADVANTAGES\nFirstly, ${sujetPropre} has many positive effects. For example, in Abidjan students use it to learn English online.\n\nBODY 2: DISADVANTAGES\nHowever, ${sujetPropre} also has problems. Many students waste time on TikTok.\n\nCONCLUSION\nIn conclusion, the future of Africa depends on it.`;
+}
+
+function traduireResultat() {
+  const sujet = document.getElementById('sujet').value;
+  const sujetPropre = sujet.replace(/Is |Are |Does |Do /i, '').replace('?', '');
+  document.getElementById('dissertation').innerText = `TITRE: ${sujet}\n\nINTRODUCTION\nDans l'Afrique d'aujourd'hui, la question de "${sujetPropre}" est très importante.\n\nPARTIE 1: AVANTAGES\nPremièrement, ${sujetPropre} a de nombreux effets positifs. Par exemple, à Abidjan les élèves l'utilisent pour apprendre l'anglais en ligne.\n\nPARTIE 2: INCONVÉNIENTS\nCependant, ${sujetPropre} a aussi des problèmes. Beaucoup d'élèves perdent du temps sur TikTok.\n\nCONCLUSION\nEn conclusion, l'avenir de l'Afrique dépend de cela.`;
+}
+
+function conjuguer() {
+  const verbe = document.getElementById('verbe').value;
+  if(!verbe) { alert("Écris un verbe"); return; }
+  document.getElementById('resultConjug').style.display = 'block';
+  document.getElementById('conjug').innerHTML = `<h3>⚡ ${verbe.toUpperCase()}</h3>I ${verbe} <br> He/She ${verbe+'s'} <br> We ${verbe}<div class="explication"><b>💡 RÈGLE:</b> Au Present Simple, on ajoute "s" à la 3ème personne</div>`;
+}
+
+function prononcer() {
+  const verbe = document.getElementById('verbe').value;
+  if(!verbe) return;
+  const speech = new SpeechSynthesisUtterance(verbe);
+  speech.lang = 'en-US'; speech.rate = 0.8;
+  window.speechSynthesis.speak(speech);
+}
+</script>
+</body>
+</html>
