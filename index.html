@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFRIKA BOSS SAAS TURBO</title>
+<style>
+  :root {
+    --orange-ci: #FF8200; --vert-ci: #009E60; --or: #FFD700;
+    --terre: #8B4513; --noir: #1A1A1A; --creme: #FFF8E7;
+  }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background: var(--creme); color: var(--noir); padding-bottom: 90px; }
+ .header { background: linear-gradient(135deg, var(--orange-ci) 0%, var(--terre) 100%); padding: 25px 15px; text-align: center; border-bottom: 5px solid var(--or); }
+ .header h1 { font-size: 24px; font-weight: 900; color: white; }
+ .header p { color: var(--or); font-weight: 700; }
+ .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+ .card { background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; border: 3px solid var(--or); box-shadow: 0 8px 25px rgba(255,130,0,0.15); }
+ .input-box { width: 100%; padding: 16px; background: var(--creme); border: 3px solid var(--orange-ci); border-radius: 12px; font-size: 16px; margin: 15px 0; font-weight: 600; }
+ .btn-primary { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--orange-ci) 0%, var(--terre) 100%); color: white; border: none; border-radius: 15px; font-weight: 900; font-size: 17px; cursor: pointer; }
+ .btn-green { background: var(--vert-ci); }
+ .result-box { background: var(--creme); border-left: 6px solid var(--vert-ci); padding: 20px; border-radius: 15px; margin-top: 20px; white-space: pre-wrap; border: 2px dashed var(--or); }
+ .explication { background: var(--creme); padding: 15px; border-radius: 12px; margin: 10px 0; border-left: 5px solid var(--orange-ci); }
+ .explication b { color: var(--terre); }
+ .badge { display: inline-block; background: var(--or); color: var(--noir); padding: 5px 12px; border-radius: 20px; font-weight: 900; font-size: 12px; margin-bottom: 10px; }
+ .footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--noir); color: var(--or); text-align: center; padding: 15px; font-weight: 900; border-top: 4px solid var(--orange-ci); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🇨🇮 AFRIKA BOSS SAAS TURBO</h1>
+  <p>L'IA qui fait Dissertation + Méthode + Traduction en 1 clic</p>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1 : GENERATEUR -->
+  <div class="card">
+    <span class="badge">ÉTAPE 1</span>
+    <h2>📝 ÉCRIS TON SUJET ICI</h2>
+    <input id="sujet" class="input-box" placeholder="Ex: social media, technology, education in Africa">
+    <button class="btn-primary" onclick="genererTout()">✨ GÉNÉRER DISSERTATION 18/20 + MÉTHODE + TRADUCTION</button>
+  </div>
+
+  <!-- SECTION 2 : RESULTAT + TRADUCTION -->
+  <div class="card" id="resultSection" style="display:none;">
+    <span class="badge" style="background:var(--vert-ci); color:white;">ÉTAPE 2</span>
+    <h2>📄 VERSION ANGLAISE - À COPIER AU BAC</h2>
+    <div class="result-box" id="dissertationEN"></div>
+    
+    <button class="btn-primary btn-green" onclick="traduireResultat()">🔄 VOIR LA TRADUCTION FRANÇAISE</button>
+    
+    <h2 style="margin-top:25px;">🇫🇷 VERSION FRANÇAISE - POUR COMPRENDRE</h2>
+    <div class="result-box" id="dissertationFR" style="display:none;"></div>
+  </div>
+
+  <!-- SECTION 3 : METHODE INCLUSE -->
+  <div class="card" id="methodeSection" style="display:none;">
+    <span class="badge">ÉTAPE 3</span>
+    <h2>📚 COMMENT LE CORRECTEUR NOTE ? LA MÉTHODE BOSS</h2>
+    
+    <div class="explication">
+      <b>1. INTRODUCTION - 4 LIGNES = 3 POINTS</b><br>
+      Accroche: "In today's Africa..." <br>
+      Présenter: "The issue of [SUJET] is important"<br>
+      Plan: "This essay will discuss advantages and disadvantages"
+      <br><div style="color:var(--vert-ci);">💡 ASTUCE: Mets "Côte d'Ivoire" dedans = +2 points</div>
+    </div>
+
+    <div class="explication">
+      <b>2. DÉVELOPPEMENT - 3 PARAGRAPHES = 10 POINTS</b><br>
+      <b>Para 1 AVANTAGES:</b> "Firstly..." + Exemple Abidjan/Dakar<br>
+      <b>Para 2 INCONVÉNIENTS:</b> "However..." + Problème TikTok<br>
+      <b>Para 3 SOLUTIONS:</b> "To solve this..." + Rôle de l'Etat
+    </div>
+
+    <div class="explication">
+      <b>3. CONCLUSION - 3 LIGNES = 3 POINTS</b><br>
+      Bilan + Opinion + "The future of Africa depends on..."
+      <br><div style="color:var(--orange-ci);">💡 ASTUCE: Finis toujours positif</div>
+    </div>
+
+    <div class="explication" style="background:var(--or);">
+      <b>🎯 BARÈME BAC: </b> Introduction 3pts + Développement 10pts + Conclusion 3pts + Langue 4pts = 20/20
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Créé par <span style="color:white;">ADJOUMANI KOUABENAN BEBOUMANE RICHMIN</span><br>
+  Pseudo : SHANKS VORAX 🤴 ROI DE L'AFRIQUE
+</div>
+
+<script>
+let lastSujet = '';
+
+function genererTout() {
+  const sujet = document.getElementById('sujet').value;
+  if(!sujet) { alert("Écris un sujet d'abord roi 👑"); return; }
+  lastSujet = sujet;
+  
+  document.getElementById('resultSection').style.display = 'block';
+  document.getElementById('methodeSection').style.display = 'block';
+  
+  const sujetPropre = sujet.replace(/Is |Are |Does |Do /i, '').replace('?', '');
+
+  // VERSION ANGLAISE
+  const texteEN = `TITLE: ${sujet}\n\nINTRODUCTION\nIn today's Africa, the issue of "${sujetPropre}" is very important for young people. This essay will analyze the advantages and disadvantages of ${sujetPropre}.\n\nBODY PARAGRAPH 1: ADVANTAGES\nFirstly, ${sujetPropre} has many positive effects in Africa. For example, in Abidjan students use it to learn English online and to find jobs. It also helps to connect people.\n\nBODY PARAGRAPH 2: DISADVANTAGES\nHowever, ${sujetPropre} also has serious problems. Many African students waste time on TikTok instead of studying. As a result, they have bad grades at school.\n\nBODY PARAGRAPH 3: SOLUTIONS\nTo solve this problem, African governments must invest in education and parents must control internet use. Schools should teach digital education.\n\nCONCLUSION\nIn conclusion, although there are problems, the benefits of ${sujetPropre} are greater. The future of Africa depends on how we use it wisely.`;
+  
+  document.getElementById('dissertationEN').innerText = texteEN;
+  
+  // Scroll automatique vers le résultat
+  document.getElementById('resultSection').scrollIntoView({behavior: 'smooth'});
+}
+
+function traduireResultat() {
+  const sujet = lastSujet;
+  const sujetPropre = sujet.replace(/Is |Are |Does |Do /i, '').replace('?', '');
+
+  const texteFR = `TITRE: ${sujet}\n\nINTRODUCTION\nDans l'Afrique d'aujourd'hui, la question de "${sujetPropre}" est très importante pour les jeunes. Cette dissertation analysera les avantages et les inconvénients de ${sujetPropre}.\n\nPARAGRAPHE 1: AVANTAGES\nPremièrement, ${sujetPropre} a de nombreux effets positifs en Afrique. Par exemple, à Abidjan les élèves l'utilisent pour apprendre l'anglais en ligne et pour trouver du travail. Cela permet aussi de connecter les gens.\n\nPARAGRAPHE 2: INCONVÉNIENTS\nCependant, ${sujetPropre} a aussi de sérieux problèmes. Beaucoup d'élèves africains perdent du temps sur TikTok au lieu d'étudier. En conséquence, ils ont de mauvaises notes à l'école.\n\nPARAGRAPHE 3: SOLUTIONS\nPour résoudre ce problème, les gouvernements africains doivent investir dans l'éducation et les parents doivent contrôler l'utilisation d'internet. Les écoles doivent enseigner l'éducation numérique.\n\nCONCLUSION\nEn conclusion, bien qu'il y ait des problèmes, les avantages de ${sujetPropre} sont plus grands. L'avenir de l'Afrique dépend de la façon dont nous l'utilisons avec sagesse.`;
+  
+  document.getElementById('dissertationFR').innerText = texteFR;
+  document.getElementById('dissertationFR').style.display = 'block';
+}
+</script>
+</body>
+  </html> 
